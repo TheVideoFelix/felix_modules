@@ -59,12 +59,12 @@ static ssize_t proc_read(struct file* file, char __user* ubuf, size_t count, lof
     strncpy(msg_buf, messages[msg_idx], msg_len);
     msg_buf[msg_len] = '\0';
 
-    if (copy_to_user(ubuf, message, message_len)) {
+    if (copy_to_user(ubuf, messages[msg_idx], msg_len)) {
         return -EFAULT;
     }
 
     *ppos = msg_len;
-    return message_len;
+    return msg_len;
 }
 
 static const struct proc_ops my_fops = {
